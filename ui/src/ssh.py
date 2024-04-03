@@ -4,7 +4,7 @@ import time
 import os
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path=f"{os.getcwd()}/X16-Surface/.env")
+load_dotenv(dotenv_path=f"{os.getcwd()}/src/X16-Surface/.env")
 
 
 class ssh:
@@ -27,10 +27,13 @@ class ssh:
             print(f"Local IP address: {ip}")
             #ros_id = 69
             # commands to launch on the pi
-            ros2_source_cmd = "source ~/.bashrc >> ~/ros2_ws/startup_logs/sourcebash.txt && export ROS_DOMAIN_ID=69 && source ros2_ws/install/setup.bash >> ~/ros2_ws/startup_logs/source.txt && echo $ROS_DOMAIN_ID >> ~/ros2_ws/startup_logs/domain_id_tmux"
+            ros2_source_cmd ="source ~/.bashrc >> ~/ros2_ws/startup_logs/sourcebash.txt && export ROS_DOMAIN_ID=69 && source ros2_ws/install/setup.bash >> ~/ros2_ws/startup_logs/source.txt && echo $ROS_DOMAIN_ID >> ~/ros2_ws/startup_logs/domain_id_tmux"
             ros2_launch_cmd = "ros2 launch rov_launch run_rov_launch.xml >> ~/ros2_ws/startup_logs/launch.txt"
             stream1_launch_cmd = f"gst-launch-1.0 -v v4l2src device={self.device_name1} ! video/x-h264, width=1920,height=1080! h264parse ! queue ! rtph264pay config-interval=10 pt=96 ! udpsink host={ip} port=5600 sync=false buffer-size=1048576 & echo $! > pid.txt"
             stream2_launch_cmd = f"gst-launch-1.0 -v v4l2src device={self.device_name2} ! video/x-h264, width=1920,height=1080! h264parse ! queue ! rtph264pay config-interval=10 pt=96 ! udpsink host={ip} port=5601 sync=false buffer-size=1048576 & echo $! > pid.txt"
+            stream3_launch_cmd = f"gst-launch-1.0 -v v4l2src device={self.device_name3} ! video/x-h264, width=1920,height=1080! h264parse ! queue ! rtph264pay config-interval=10 pt=96 ! udpsink host={ip} port=5602 sync=false buffer-size=1048576 & echo $! > pid.txt"
+            stream4_launch_cmd = f"gst-launch-1.0 -v v4l2src device={self.device_name4} ! video/x-h264, width=1920,height=1080! h264parse ! queue ! rtph264pay config-interval=10 pt=96 ! udpsink host={ip} port=5603 sync=false buffer-size=1048576 & echo $! > pid.txt"
+          #  print(stream1_launch_cmd)
           #  print(stream1_launch_cmd)
 
             # establishing the ssh connection
@@ -57,6 +60,8 @@ class ssh:
             # launching the camera streams on the pi
             self.launch_stream(1, stream1_launch_cmd)
             self.launch_stream(2, stream2_launch_cmd)
+            self.launch_stream(3, stream3_launch_cmd)
+            self.launch_stream(4, stream4_launch_cmd)
 
             return self.connection
 
