@@ -22,7 +22,7 @@ class GamepadNode(Node):
             self.pub_tools = self.create_publisher(
                 ToolsCommandMsg, 'tools', 10)
 
-            self.tools = [0, 0, 0, 0, 0]
+            self.tools = [0, 0, 0, 0]
 
             self.SCALE_TRANSLATIONAL_X = 1.0
             self.SCALE_TRANSLATIONAL_Y = 1.0
