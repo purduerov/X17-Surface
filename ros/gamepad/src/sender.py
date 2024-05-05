@@ -7,13 +7,14 @@ import time
 #ROS
 import rclpy
 from std_msgs.msg import String, Bool, Empty
-from shared_msgs.msg import RovVelocityCommand, ToolsCommandMsg
+from shared_msgs.msg import RovVelocityCommand, ToolsCommandMsg, ToolsMotorMsg
 from geometry_msgs.msg import Twist
 
 from config import *
 
 
-tools = [0, 0, 0, 0, 0]
+tools = [0, 0, 0, 0]
+motor_tools = [127,127,127,127]
 
 SCALE_TRANSLATIONAL_X = 1.0
 SCALE_TRANSLATIONAL_Y = 1.0
@@ -83,6 +84,14 @@ def getTools():
 
     return tm
 
+def getMotor():
+    global motor_tools
+
+    tmm = ToolsMotorMsg()
+    tmm.tools = [i for i in motor_tools]
+
+    return tmm
+
 
 def correct_raw(raw, abbv):
     '''Corrects the raw value from the gamepad to be in the range [-1.0, 1.0]'''
@@ -113,6 +122,7 @@ def correct_raw(raw, abbv):
 def process_event(event):
     '''Processes a pygame event'''
     global tools
+    global motor_tools
     global is_fine
     global gamepad_state
     global is_pool_centric
@@ -153,10 +163,25 @@ def process_event(event):
         else:
             pass
         if event.value[0] == -1:
-            pitch_lock = not pitch_lock
+            # add motor tool here
+         #   pitch_lock = not pitch_lock
+            if motor_tools[0] == 127:
+                motor_tools = [180,180,180,180]
+            elif motor_tools[0] == 180:
+                pass
+            else:
+                motor_tools = [127,127,127,127]
+
         elif event.value[0] == 1:
-            depth_lock = not depth_lock
-            is_pool_centric = True
+            if motor_tools[0] == 127:
+                motor_tools = [70,70,70,70]
+            elif motor_tools[0] == 70:
+                pass
+            else:
+                motor_tools = [127,127,127,127]
+            #add motor tool here
+          #  depth_lock = not depth_lock
+           # is_pool_centric = True
         else:
             pass
 
@@ -179,6 +204,8 @@ def pub_data():
     pub.publish(getMessage())
     # Get a message to publish for the tools topic
     pub_tools.publish(getTools())
+
+    pub_motor_tools.publish(getMotor())
 
 def update_gamepad():
     '''Updates the gamepad state'''
@@ -245,6 +272,7 @@ if __name__ == '__main__':
     # Create the publishers
     pub = node.create_publisher(RovVelocityCommand, 'rov_velocity', 10)
     pub_tools = node.create_publisher(ToolsCommandMsg, 'tools', 10)
+    pub_motor_tools = node.create_publisher(ToolsMotorMsg, 'tools_motor', 10)
 
     # Create the timers
     data_thread = node.create_timer(0.1, pub_data)

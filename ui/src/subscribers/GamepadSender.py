@@ -7,7 +7,7 @@ import time
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Bool, Empty
-from shared_msgs.msg import RovVelocityCommand, ToolsCommandMsg
+from shared_msgs.msg import RovVelocityCommand, ToolsCommandMsg, ToolsMotorMsg
 from geometry_msgs.msg import Twist
 
 from config import *
@@ -21,8 +21,13 @@ class GamepadNode(Node):
                 RovVelocityCommand, 'rov_velocity', 10)
             self.pub_tools = self.create_publisher(
                 ToolsCommandMsg, 'tools', 10)
+            
+            self.pub_motor_tools = self.create_publisher(
+                ToolsMotorMsg, 'tools_motor', 10)
+
 
             self.tools = [0, 0, 0, 0]
+            self.motor_tools = [127,127,127,127]
 
             self.SCALE_TRANSLATIONAL_X = 1.0
             self.SCALE_TRANSLATIONAL_Y = 1.0
@@ -143,10 +148,23 @@ class GamepadNode(Node):
             else:
                 pass
             if event.value[0] == -1:
-                self.pitch_lock = not self.pitch_lock
+            # add motor tool here
+         #   pitch_lock = not pitch_lock
+                if self.motor_tools[0] == 127:
+                    self.motor_tools = [180,180,180,180]
+                elif self.motor_tools[0] == 180:
+                    pass
+                else:
+                    self.motor_tools = [127,127,127,127]
+
             elif event.value[0] == 1:
-                self.depth_lock = not self.depth_lock
-                self.is_pool_centric = True
+                if self.motor_tools[0] == 127:
+                    self.motor_tools = [70,70,70,70]
+                elif self.motor_tools[0] == 70:
+                    pass
+                else:
+                    self.motor_tools = [127,127,127,127]
+                #add motor tool here
             else:
                 pass
 
@@ -164,6 +182,8 @@ class GamepadNode(Node):
     def pub_data(self):
         self.pub.publish(self.getMessage())
         self.pub_tools.publish(self.getTools())
+        self.pub_motor_tools.publish(self.getMotorTools())
+        
 
     def update_gamepad(self):
         for event in pygame.event.get():
@@ -205,3 +225,9 @@ class GamepadNode(Node):
         tm = ToolsCommandMsg()
         tm.tools = [i for i in self.tools]
         return tm
+    
+    def getMotorTools(self):
+        tmm = ToolsMotorMsg()
+        tmm.tools = [i for i in self.motor_tools]
+
+        return tmm
