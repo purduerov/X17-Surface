@@ -150,20 +150,20 @@ class GamepadNode(Node):
             if event.value[0] == -1:
             # add motor tool here
          #   pitch_lock = not pitch_lock
-                if self.motor_tools[0] == 127:
-                    self.motor_tools = [180,180,180,180]
+                if self.motor_tools[0] == 125:
+                    self.motor_tools = [250,250,250,250]
                 elif self.motor_tools[0] == 180:
                     pass
                 else:
-                    self.motor_tools = [127,127,127,127]
+                    self.motor_tools = [125,125,125,125]
 
             elif event.value[0] == 1:
-                if self.motor_tools[0] == 127:
-                    self.motor_tools = [70,70,70,70]
+                if self.motor_tools[0] == 125:
+                    self.motor_tools = [0,0,0,0]
                 elif self.motor_tools[0] == 70:
                     pass
                 else:
-                    self.motor_tools = [127,127,127,127]
+                    self.motor_tools = [125,125,125,125]
                 #add motor tool here
             else:
                 pass
