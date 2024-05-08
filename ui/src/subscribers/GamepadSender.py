@@ -132,8 +132,13 @@ class GamepadNode(Node):
                 self.tools[2] = not self.tools[2]
             elif event.button == JOY_BUTTON_KEY['Y'] and self.LOCKOUT:
                 self.tools[3] = not self.tools[3]
-            elif event.button == JOY_BUTTON_KEY['MENU']:
+            elif event.button == JOY_BUTTON_KEY['START']:
                 self.is_pool_centric = not self.is_pool_centric
+            elif event.button == JOY_BUTTON_KEY['MENU']:
+                if self.REVERSE == 1:
+                    self.REVERSE = -1
+                else:
+                    self.REVERSE = 1
 
         elif event.type == pygame.JOYBUTTONUP:
             self.gamepad_state[JOY_BUTTON[event.button]] = 0
