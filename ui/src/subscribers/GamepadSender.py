@@ -40,7 +40,7 @@ class GamepadNode(Node):
             self.TRIM_X = 0.0
             self.TRIM_Y = 0.0
             self.TRIM_Z = 0.0
-
+            self.ANGULAR_Z_REVERSE = -1
             self.REVERSE = 1
             self.LOCKOUT = True
             self.is_fine = 0
@@ -134,11 +134,10 @@ class GamepadNode(Node):
                 self.tools[3] = not self.tools[3]
             elif event.button == JOY_BUTTON_KEY['START']:
                 self.is_pool_centric = not self.is_pool_centric
+                self.ANGULAR_Z_REVERSE = -1 * self.ANGULAR_Z_REVERSE
             elif event.button == JOY_BUTTON_KEY['MENU']:
-                if self.REVERSE == 1:
-                    self.REVERSE = -1
-                else:
-                    self.REVERSE = 1
+                self.REVERSE = -1 * self.REVERSE
+                
 
         elif event.type == pygame.JOYBUTTONUP:
             self.gamepad_state[JOY_BUTTON[event.button]] = 0
@@ -215,7 +214,7 @@ class GamepadNode(Node):
         t.angular.x = -x
         t.angular.y = (-self.gamepad_state['RSY']
                        * self.SCALE_ROTATIONAL_Y) * self.REVERSE
-        t.angular.z = -self.gamepad_state['RSX'] * self.SCALE_ROTATIONAL_Z
+        t.angular.z = self.ANGULAR_Z_REVERSE * self.gamepad_state['RSX'] * self.SCALE_ROTATIONAL_Z
 
         new_msg = RovVelocityCommand()
         new_msg.twist = t
