@@ -15,11 +15,11 @@ def generate_launch_description():
                 executable='sender.py',
                 namespace='rov',
             ),
-            # Node(
-            #     package="mediamtx_node",
-            #     executable="mediamtx_node.py",
-            #     namespace="rov",
-            # ),
+            Node(
+                package="mediamtx_node",
+                executable="mediamtx_node.py",
+                namespace="rov",
+            ),
             TimerAction(
                 period=5.0,  # Delay for n seconds
                 actions=[

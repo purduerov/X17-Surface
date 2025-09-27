@@ -24,13 +24,13 @@
       "angular": {
         "x": {
           "device": "joystick_left",
-          "axis": 0,
+          "axis": 1,
           "scale": 1,
           "invert": false
         },
         "y": {
           "device": "joystick_left",
-          "axis": 1,
+          "axis": 0,
           "scale": 1,
           "invert": false
         },

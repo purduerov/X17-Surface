@@ -48,6 +48,7 @@ class Controller(Node):
         self.depth_lock = False
         self.pitch_lock = False
         self.tools = [0] * 7
+        # self.tools[0] ^= 2 ** 3
         
         try:
             self.init_pygame()
@@ -156,8 +157,9 @@ class Controller(Node):
                 self.tools[0] ^= 2 ** 0
 
             elif event.button == 1:
-                self.tools[0] ^= 2 ** 2
-                self.tools[0] ^= 2 ** 3
+                self.tools[0] ^= 2 ** 1
+                # self.tools[0] ^= 2 ** 2
+                # self.tools[0] ^= 2 ** 3
 
     def handle_joy_hat_event(self, event):
         if event.hat == 0:
