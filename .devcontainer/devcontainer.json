@@ -7,11 +7,13 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-python.python",           // Python extension (if needed)
-                "ms-azuretools.vscode-docker" // Docker extension
+                "ms-python.python",
+                "ms-azuretools.vscode-docker",
+                "ms-python.vscode-pylance"
             ],
             "settings": {
-                "terminal.integrated.shell.linux": "/bin/bash"
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "python.defaultInterpreterPath": "/usr/bin/python3"
             }
         }
     },
@@ -19,9 +21,10 @@
         "source=${localWorkspaceFolder}/,target=/workspace,type=bind"
     ],
     "runArgs": [
-        "--network", "bridge",
-        "--env", "ROS_DOMAIN_ID=69" // Set ROS_DOMAIN_ID
+        "--network=bridge",
+        "--env=ROS_DOMAIN_ID=69",
+        "--env=PIP_BREAK_SYSTEM_PACKAGES=1"
     ],
     "remoteUser": "root",
-    "postCreateCommand": "echo 'source /opt/ros/humble/setup.bash' >> /root/.bashrc && echo 'export ROS_DOMAIN_ID=69' >> /root/.bashrc"
+    "postCreateCommand": "echo 'source /opt/ros/jazzy/setup.bash' >> /root/.bashrc && echo 'export ROS_DOMAIN_ID=69' >> /root/.bashrc"
 }

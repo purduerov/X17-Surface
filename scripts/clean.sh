@@ -63,6 +63,6 @@ if [ "$purge" = true ]; then
     fi
 fi
 
-source /opt/ros/humble/setup.bash
+source /opt/ros/jazzy/setup.bash
 
 echo "Cleanup complete."
