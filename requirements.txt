@@ -5,7 +5,7 @@ opencv_python==4.11.0.86
 paramiko==3.4.0
 pygame==2.5.2
 python-dotenv==1.0.1
-setuptools==59.6.0
+setuptools>=68.2.0
 flask==3.0.3
 flask-socketio==5.4.1
 requests==2.32.3

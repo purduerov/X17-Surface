@@ -59,7 +59,9 @@ sudo apt install python3.10 python3.10-dev python3.10-venv -y
 sudo apt -y install python3-pip
 
 # Install colcon
-sudo apt install python3-colcon-common-extensions -y
+pip install -U colcon-core colcon-common-extensions
+
+# sudo apt install python3-colcon-common-extensions -y
 
 # Install python packages
 sudo pip3 install -r requirements.txt

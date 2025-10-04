@@ -21,7 +21,8 @@
         "source=${localWorkspaceFolder}/,target=/workspace,type=bind"
     ],
     "runArgs": [
-        "--network=bridge",
+        // "--network=bridge", For dev purposes
+        "--network=host",
         "--env=ROS_DOMAIN_ID=69",
         "--env=PIP_BREAK_SYSTEM_PACKAGES=1"
     ],
