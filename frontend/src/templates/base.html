@@ -25,15 +25,14 @@
                         </a>
                     </li>
                     
-                    
-                    <!-- Dashboard Dropdown -->
+                    <!-- Camera Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {% if active_page in ['dashboard'] %}active{% endif %}" 
-                           href="#" id="dashboardDropdown" role="button" 
+                        <a class="nav-link dropdown-toggle {% if active_page in ['fullscreen-camera', 'all-cameras'] %}active{% endif %}" 
+                           href="#" id="cameraDropdown" role="button" 
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-camera-video"></i> Dashboard
+                            <i class="bi bi-camera-video"></i> Cameras
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="dashboardDropdown">
+                        <ul class="dropdown-menu" aria-labelledby="cameraDropdown">
                             <li>
                                 <a class="dropdown-item {% if active_page == 'fullscreen-camera' %}active{% endif %}" 
                                    href="/fullscreen-camera">
