@@ -79,12 +79,12 @@ class Frontend(Node):
         # Default Route
         @self.app.route("/")
         def index():
-            return redirect(url_for("new_ui"), code=302)
+            return redirect(url_for("home"), code=302)
         
         # Main UI
-        @self.app.route("/ui")
-        def new_ui():
-            return render_template("innovative_ui.html", active_page="ui", camera_urls=self.camera_urls)
+        @self.app.route("/home")
+        def home():
+            return render_template("innovative_ui.html", active_page="home", camera_urls=self.camera_urls)
         
         ### -------- CAMERA PAGES -------- ###
 
