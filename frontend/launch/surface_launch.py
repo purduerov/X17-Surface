@@ -10,11 +10,11 @@ def generate_launch_description():
                 executable="app.py",
                 namespace="rov",
             ),
-            # Node(
-            #     package='controller',
-            #     executable='sender.py',
-            #     namespace='rov',
-            # ),
+            Node(
+                package='controller',
+                executable='sender.py',
+                namespace='rov',
+            ),
             Node(
                 package="mediamtx_node",
                 executable="mediamtx_node.py",
