@@ -84,7 +84,7 @@ class Frontend(Node):
         # Main UI
         @self.app.route("/ui")
         def new_ui():
-            return render_template("innovative_ui.html", camera_urls=self.camera_urls)
+            return render_template("innovative_ui.html", active_page="ui", camera_urls=self.camera_urls)
         
         ### -------- CAMERA PAGES -------- ###
 
