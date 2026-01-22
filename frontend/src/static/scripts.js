@@ -173,4 +173,37 @@ socket.on('surface_imu', function(msg){
 });
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".photo-button").forEach(button => {
+    button.addEventListener("click", async (e) => {
+      e.stopPropagation();
 
+      const camera = button.dataset.camera;
+      const original = button.textContent;
+
+      button.textContent = "⏳";
+      button.disabled = true;
+
+      try {
+        const res = await fetch(`/api/photo/${camera}`, {
+          method: "POST"
+        });
+
+        const data = await res.json();
+
+        if (data.status === "ok") {
+          button.textContent = "✅";
+          setTimeout(() => button.textContent = original, 1000);
+        } else {
+          throw new Error("Photo failed");
+        }
+      } catch (err) {
+        console.error(err);
+        button.textContent = "❌";
+        setTimeout(() => button.textContent = original, 1500);
+      } finally {
+        button.disabled = false;
+      }
+    });
+  });
+});

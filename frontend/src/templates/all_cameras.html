@@ -58,6 +58,23 @@
   .fullscreen-button:hover {
     background-color: rgba(0,0,0,0.8);
   }
+
+  .photo-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .photo-button:hover {
+    background-color: rgba(0,0,0,0.8);
+  }
 </style>
 {% endblock %}
 
@@ -71,6 +88,11 @@
       <div class="camera-cell">
         <div class="camera-label">Camera 1</div>
         <iframe src="{{ camera_urls.camera1|safe }}" scrolling="no"></iframe>
+        
+        <button class="photo-button" data-camera="camera1">
+          📸
+        </button>
+
         <button class="fullscreen-button" data-camera="1">
           <i class="bi bi-fullscreen"></i>
         </button>
@@ -82,6 +104,11 @@
       <div class="camera-cell">
         <div class="camera-label">Camera 2</div>
         <iframe src="{{ camera_urls.camera2|safe }}" scrolling="no"></iframe>
+
+        <button class="photo-button" data-camera="camera2">
+          📸
+        </button>
+
         <button class="fullscreen-button" data-camera="2">
           <i class="bi bi-fullscreen"></i>
         </button>
@@ -93,6 +120,11 @@
       <div class="camera-cell">
         <div class="camera-label">Camera 3</div>
         <iframe src="{{ camera_urls.camera3|safe }}" scrolling="no"></iframe>
+
+        <button class="photo-button" data-camera="camera3">
+          📸
+        </button>
+
         <button class="fullscreen-button" data-camera="3">
           <i class="bi bi-fullscreen"></i>
         </button>
@@ -104,6 +136,11 @@
       <div class="camera-cell">
         <div class="camera-label">Camera 4</div>
         <iframe src="{{ camera_urls.camera4|safe }}" scrolling="no"></iframe>
+
+        <button class="photo-button" data-camera="camera4">
+          📸
+        </button>
+
         <button class="fullscreen-button" data-camera="4">
           <i class="bi bi-fullscreen"></i>
         </button>
@@ -125,6 +162,38 @@ document.addEventListener('DOMContentLoaded', function() {
       const cameraNumber = this.getAttribute('data-camera');
       // Redirect to single camera view with the selected camera
       window.location.href = `/fullscreen-camera?camera=${cameraNumber}`;
+    });
+  });
+
+  // photo button
+  document.querySelectorAll('.photo-button').forEach(button => {
+    button.addEventListener('click', async function (e) {
+      e.stopPropagation(); // Prevent accidental fullscreen click
+
+      const camera = this.getAttribute('data-camera');
+      this.disabled = true;
+      this.textContent = "⏳";
+
+      try {
+        const res = await fetch(`/api/photo/${camera}`, {
+          method: "POST"
+        });
+
+        const data = await res.json();
+
+        if (data.status === "ok") {
+          this.textContent = "✅";
+          setTimeout(() => this.textContent = "📸", 1000);
+        } else {
+          throw new Error("Photo failed");
+        }
+      } catch (err) {
+        console.error(err);
+        this.textContent = "❌";
+        setTimeout(() => this.textContent = "📸", 1500);
+      } finally {
+        this.disabled = false;
+      }
     });
   });
 });

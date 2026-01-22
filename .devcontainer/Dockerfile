@@ -1,5 +1,5 @@
 # Specify base image
-FROM ros:humble
+FROM ros:jazzy
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies

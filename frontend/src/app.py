@@ -20,6 +20,7 @@ from frontend_utils.frontend_handler import handle_frontend_event
 from frontend_utils.log_helper import LogHelper
 from frontend_utils.recording_api import RecordingRoutes  # Import the new module
 from frontend_utils.controller_api import ControllerRoutes  # Import the new module
+from frontend_utils.photo_api import PhotoButton
 
 class Frontend(Node):
     def __init__(self):
@@ -48,10 +49,23 @@ class Frontend(Node):
             'camera4': os.getenv('CAMERA4_URL', 'http://localhost:8889/camera_4')
         }
 
+        # For FFmpeg snapshot
+        self.camera_rtsp_urls = {
+            "camera1": "rtsp://127.0.0.1:8554/camera_1",
+            "camera2": "rtsp://127.0.0.1:8554/camera_2",
+        }        
+
         self.get_logger().info(f"Camera URLs: {self.camera_urls}")
+
+        
 
         ### ----- ROUTE SETUP ----- ###
         self.setup_routes()
+        self.photo_button = PhotoButton(
+            self.app,
+            self.get_logger(),
+            self.camera_rtsp_urls
+        )
         self.recording_routes = RecordingRoutes(self.app, self.get_logger())
         self.controller_routes = ControllerRoutes(self.app, self.get_logger())
 
