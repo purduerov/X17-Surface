@@ -3,171 +3,268 @@
 {% block title %}Home | X17-Surface{% endblock %}
 
 {% block content %}
-    <div class="default-container">
-        <div class="left-container">
-            <iframe id=stream1 src="{{ camera_urls.camera1|safe }}" scrolling="no" style="width: 100%; height: 100%;"></iframe>
-            <iframe id=stream2 src="{{ camera_urls.camera2|safe }}" scrolling="no" style="width: 100%; height: 100%;"></iframe>
-            <iframe id=stream3 src="{{ camera_urls.camera3|safe }}" scrolling="no" style="width: 100%; height: 100%;"></iframe>
-        </div>
-        <div class="middle-container">
-            <div class="speedo-grid">
-                <div>
-                    <canvas id="speedo1" width="300" height="150"></canvas>
-                </div>
-                <div>
-                    <canvas id="speedo2" width="300" height="150"></canvas>
-                </div>
-                <div>
-                    <div class="thruster-label">1</div>
-                    <canvas id="speedo3" width="300" height="150"></canvas>
-                </div>
-                <div>
-                    <div class="thruster-label">2</div>
-                    <canvas id="speedo4" width="300" height="150"></canvas>
-                    
-                </div>
-                <div>
-                    <div class="thruster-label">3</div>
-                    <canvas id="speedo5" width="300" height="150"></canvas>
-                    
-                </div>
-                <div>
-                    <div class="thruster-label">4</div>
-                    <canvas id="speedo6" width="300" height="150"></canvas>
-                    
-                </div>
-                <div>
-                    <div class="thruster-label">5</div>
-                    <canvas id="speedo7" width="300" height="150"></canvas>
-                    <div class="thruster-label">7</div>
+<div class="dashboard-main">
 
-                </div>
-                <div>
-                    <div class="thruster-label">6</div>
-                    <canvas id="speedo8" width="300" height="150"></canvas>
-                    <div class="thruster-label">8</div>
-                </div>
-                
-            </div>
-            <div id ="thruster-data" class="data-container">
-                <div id="velocity-data" class="grid-item">Linear Command<br>&lt00.00, 00.00, 00.00&gt m/s</div>
-                <div id="angular-data" class="grid-item">Angular Command<br>&lt00.00, 00.00, 00.00&gt &deg/s</div>
-            </div>
+    <div class="left-container">
+        <div class="stream-wrapper"><iframe id="stream1" src="{{ camera_urls.camera1|safe }}" scrolling="no"></iframe></div>
+        <div class="stream-wrapper"><iframe id="stream2" src="{{ camera_urls.camera2|safe }}" scrolling="no"></iframe></div>
+        <div class="stream-wrapper"><iframe id="stream3" src="{{ camera_urls.camera3|safe }}" scrolling="no"></iframe></div>
+    </div>
+
+    <div class="middle-container">
+        <div class="speedo-grid">
+            <div class="thruster-cell"><canvas id="speedo1"></canvas><div class="thruster-label">1</div></div>
+            <div class="thruster-cell"><canvas id="speedo2"></canvas><div class="thruster-label">2</div></div>
+            <div class="thruster-cell"><canvas id="speedo3"></canvas><div class="thruster-label">3</div></div>
+            <div class="thruster-cell"><canvas id="speedo4"></canvas><div class="thruster-label">4</div></div>
+            <div class="thruster-cell"><canvas id="speedo5"></canvas><div class="thruster-label">5</div></div>
+            <div class="thruster-cell"><canvas id="speedo6"></canvas><div class="thruster-label">6</div></div>
         </div>
-        <div class="right-container">
-            <div id="task-1" class="data-container task-data">
-                <div id="task-1.1" class="grid-item">1.1</div>
-                <div id="task-1.2" class="grid-item">1.2</div>
-                <div id="task-1.3" class="grid-item">1.3</div>
-            </div>  
-            <div id="task-2.1-info" class="data-container hidden">
-                This is the information for Task 2.1
+
+        <div id="command-container">
+            <div class="command-box">
+                <span class="label">Linear Command</span>
+                <span class="value">&lt;00.00, 00.00, 00.00&gt; m/s</span>
             </div>
-            <div id="task-2.2-info" class="data-container hidden">
-                This is the information for Task 2.2
-            </div>
-            <div id="task-3.1-info" class="data-container hidden">
-                This is the information for Task 3.1
-            </div>
-            <div id="task-2-and-3" class="data-container task-data">
-                <div id="task-2.1" class="grid-item">2.1</div>
-                <div id="task-2.2" class="grid-item">2.2</div>
-                <div id="task-3.1" class="grid-item">3.1</div>
-            </div>    
-            <div id="task-1.1-info" class="data-container hidden">
-                This is the information for Task 1.1
-            </div>
-            <div id="task-1.2-info" class="data-container hidden">
-                <div id="task-1.2.1" class="data-container">
-                    <div class="data-container header-task">
-                        <div class="grid-item">1</div>
-                        <div class="grid-item">2</div>
-                    </div>
-                    <div class="data-container sub-task">
-                        <div class="grid-item">3</div>
-                        <div class="grid-item">4</div>
-                        <div class="grid-item">5</div>
-                    </div>
-                    <div class="data-container sub-task">
-                        <div class="grid-item">6</div>
-                        <div class="grid-item">7</div>
-                        <div class="grid-item">8</div>
-                    </div>
-                </div>
-                <div id="task-1.2.2" class="data-container">
-                    <div class="data-container header-task">
-                        <div class="grid-item">1</div>
-                        <div class="grid-item">2</div>
-                    </div>
-                    <div class="data-container sub-task">
-                        <div class="grid-item">3</div>
-                        <div class="grid-item">4</div>
-                        <div class="grid-item">5</div>
-                    </div>
-                    <div class="data-container sub-task">
-                        <div class="grid-item">6</div>
-                        <div class="grid-item">7</div>
-                        <div class="grid-item">8</div>
-                    </div>
-                </div>
-            </div>
-            <div id="task-1.3-info" class="data-container hidden">
-                This is the information for Task 1.3
-            </div>
-            <div id="internal-data" class="data-container">
-                <div id="pressure-data" class="grid-item">Pressure<br>00.00 psi</div>
-                <div id="temp-data" class="grid-item">Temperature<br>00.00&deg C</div>
-                <div id="humidity-data" class="grid-item">Humidity<br>50%</div>
-            </div>
-            <div id="electrical-data" class="data-container">
-                <div id="current-data" class="grid-item">Current<br>00.00 A</div>
-                <div id="voltage-data" class="grid-item">Voltage<br>00.00 V</div>
-            </div>
-            <div id="inertial-data" class="data-container">
-                <div id="accel-data" class="grid-item">Acceleration : &lt00.00, 00.00, 00.00&gt m/s^2</div>
-                <div id="pry-data" class="grid-item">Gyro : &lt00.00, 00.00, 00.00&gt &deg</div>
-            </div>
-            <div id="external-data" class="data-container">
-                <div id="depth-data" class="grid-item">Depth : 00.00 m</div>
+            <div class="command-box">
+                <span class="label">Angular Command</span>
+                <span class="value">&lt;00.00, 00.00, 00.00&gt; &deg;/s</span>
             </div>
         </div>
     </div>
+
+    <div class="right-container">
+        <div class="connected-group">
+            <div class="task-button-container">
+                <button id="openTasks" class="task-open-btn">Tasks</button>
+            </div>
+            <div id="internal-data" class="data-container data-group">
+                <div class="data-item"><span class="label">Pres</span><span class="value">0.0 psi</span></div>
+                <div class="data-item"><span class="label">Temp</span><span class="value">0.0&deg;C</span></div>
+                <div class="data-item"><span class="label">Hum</span><span class="value">50%</span></div>
+            </div>
+        </div>
+
+        <div id="electrical-data" class="data-container data-group">
+            <div class="data-item"><span class="label">Current</span><span class="value">00.00 A</span></div>
+            <div class="data-item"><span class="label">Voltage</span><span class="value">00.00 V</span></div>
+        </div>
+
+        <div id="inertial-data" class="data-container data-group">
+            <div class="data-item"><span class="label">Accel</span><span class="value">&lt;0, 0, 0&gt;</span></div>
+            <div class="data-item"><span class="label">Gyro</span><span class="value">&lt;0, 0, 0&gt;</span></div>
+        </div>
+
+        <div id="external-data" class="data-container data-group">
+            <div class="data-item"><span class="label">Depth</span><span class="value">00.00 m</span></div>
+        </div>
+    </div>
+</div>
+
+<div id="taskModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Tasks</h2>
+            <span class="close">&times;</span>
+        </div>
+        
+        <div class="task-grid">
+            <div class="task-card">
+                <h3>Task 1.1</h3>
+                <ul>
+                    <li>task info</li>
+                    <li>task info</li>
+                    <li>task info</li>
+                </ul>
+            </div>
+            <div class="task-card">
+                <h3>Task 1.2</h3>
+                <ul>
+                    <li>task info</li>
+                    <li>task info</li>
+                    <li>task info</li>
+                </ul>
+            </div>
+            <div class="task-card">
+                <h3>Task 1.3</h3>
+                <ul>
+                    <li>task info</li>
+                    <li>task info</li>
+                    <li>task info</li>
+                </ul>
+            </div>
+            <div class="task-card">
+                <h3>Task 2.1</h3>
+                <ul>
+                    <li>task info</li>
+                    <li>task info</li>
+                    <li>task info</li>
+                </ul>
+            </div>
+            <div class="task-card">
+                <h3>Task 2.2</h3>
+                <ul>
+                    <li>task info</li>
+                    <li>task info</li>
+                    <li>task info</li>
+                </ul>
+            </div>
+            <div class="task-card">
+                <h3>Task 3.1</h3>
+                <ul>
+                    <li>task info</li>
+                    <li>task info</li>
+                    <li>task info</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById("taskModal");
+    const openBtn = document.getElementById("openTasks");
+    const closeBtn = document.querySelector(".close");
+
+    openBtn.onclick = () => { modal.style.display = "flex"; }
+    closeBtn.onclick = () => { modal.style.display = "none"; }
+    window.onclick = (event) => {
+        if (event.target === modal) { modal.style.display = "none"; }
+    }
+</script>
 {% endblock %}
 
 {% block styles %}
 <style>
-/* Make dashboard behave like logs page */
+:root {
+    --bg-dark: #02142b;
+    --bg-panel: #001c38;
+    --bg-item: #01284f;
+    --accent: #00e6ff;
+    --text-main: #ffffff;
+}
+
+html, body {
+    margin: 0; padding: 0;
+    height: 100vh; width: 100vw;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+    font-family: "Orbitron", sans-serif;
+    color: var(--text-main);
+}
+
+h2, h3, .label, .value, .thruster-label, li, .close {
+    color: var(--text-main) !important;
+}
+
 .dashboard-main {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.2fr;
     gap: 10px;
-    padding-top: 70px; 
-    height: calc(100vh - 70px); 
-    overflow-y: auto; 
+    height: calc(100vh - 75px);
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .left-container, .middle-container, .right-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: flex; flex-direction: column; gap: 10px; height: 100%; min-height: 0;
 }
 
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
+.stream-wrapper { flex: 1; background: #000; border-radius: 4px; overflow: hidden; }
+iframe { width: 100%; height: 100%; border: none; }
 
 .speedo-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    flex: 2.5; display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr);
+    gap: 10px; background: #031a36; padding: 10px; border-radius: 8px;
+}
+.thruster-cell { background: var(--bg-item); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.thruster-cell canvas { max-height: 85%; max-width: 90%; }
+.thruster-label { font-size: 1rem; margin-top: 4px; }
+
+#command-container { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.command-box { flex: 1; background: var(--bg-item); border: 1px solid #033a66; border-radius: 6px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.command-box .label { font-size: 1.1rem; margin-bottom: 2px; }
+.command-box .value { font-size: 1.3rem; font-weight: bold; }
+
+.connected-group { flex: 1.5; display: flex; flex-direction: column; min-height: 0; }
+.task-button-container { flex: 0 0 auto; height: 50px; }
+.task-open-btn { 
+    width: 100%; height: 100%; background: #01426e; color: white; border: 1px solid #033a66; 
+    cursor: pointer; font-size: 1.2rem; border-radius: 6px 6px 0 0; font-family: inherit;
+}
+.task-open-btn:hover { background: #0167ae; }
+
+#internal-data { flex: 1; border-top: none; border-radius: 0 0 6px 6px; }
+#electrical-data, #inertial-data, #external-data { flex: 1; }
+
+.data-container { background: var(--bg-panel); border: 1px solid #033a66; border-radius: 6px; padding: 8px; }
+.data-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 8px; }
+
+.data-item { background: var(--bg-item); border-radius: 4px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 5px; }
+.data-item .label { font-size: 0.85rem; }
+.data-item .value { font-size: 1.1rem; font-weight: bold; }
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 3000;
+    left: 0; top: 0; 
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); 
+    justify-content: center; 
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.data-container {
-    background-color: #f5f5f5;
-    padding: 10px;
-    border-radius: 5px;
+.modal-content {
+    background: var(--bg-panel); 
+    width: 95%; 
+    max-width: 1100px; 
+    max-height: 85vh; 
+    padding: 25px; 
+    border-radius: 12px; 
+    border: 2px solid #033a66;
+    overflow-y: auto; 
+    box-shadow: 0 0 20px rgba(0, 230, 255, 0.2);
+    box-sizing: border-box;
+}
+
+.modal-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 20px; 
+    border-bottom: 1px solid #033a66; 
+    padding-bottom: 10px; 
+}
+
+.close { font-size: 35px; cursor: pointer; line-height: 1; }
+
+.task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.task-card { 
+    background: var(--bg-item); 
+    padding: 15px; 
+    border-radius: 8px; 
+    border-left: 4px solid #033a66; 
+}
+.task-card h3 { margin: 0 0 10px 0; font-size: 1.1rem; }
+.task-card ul { margin: 0; padding-left: 20px; }
+
+@media (max-width: 600px) {
+    .modal-content {
+        width: 100%;
+        max-height: 95vh;
+        padding: 15px;
+    }
+    .task-grid {
+        grid-template-columns: 1fr; 
+    }
 }
 </style>
 {% endblock %}

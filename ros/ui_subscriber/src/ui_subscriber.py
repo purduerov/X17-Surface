@@ -50,7 +50,7 @@ class UISubscriber(Node):
         # Don't process messages if we're shutting down
         if self.shutting_down:
             return
-            
+
         # Ignore the heartbeat message
         if topic_name == "heartbeat":
             return
@@ -63,14 +63,14 @@ class UISubscriber(Node):
         # Emit the received message to the frontend using SocketIO
         if sio.connected:
             sio.emit(topic_name, msg_json)
-            
+
     def cleanup(self):
         """Clean shutdown logic"""
         if self.shutting_down:
             return
-            
+
         self.shutting_down = True
-        
+
         # Disconnect from SocketIO server
         if sio.connected:
             try:
@@ -113,23 +113,23 @@ def main():
     # Connect to the SocketIO server
     load_dotenv(dotenv_path=f"/workspaces/X17-Surface/.env")
     port = str(os.getenv("FLASK_PORT", 5013))
-    
+
     try:
         sio.connect("http://127.0.0.1:" + port)
         ui_subscriber.get_logger().info(f"Connected to SocketIO server at port {port}")
     except Exception as e:
         ui_subscriber.get_logger().error(f"Failed to connect to SocketIO server: {e}")
-    
+
     # Set up signal handler for graceful shutdown
     def signal_handler(sig, frame):
         ui_subscriber.cleanup()
         # Exit the program
         sys.exit(0)
-        
+
     # Register signal handlers
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
-    
+
     try:
         rclpy.spin(ui_subscriber)
     except KeyboardInterrupt:

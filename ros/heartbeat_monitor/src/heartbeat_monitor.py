@@ -38,7 +38,7 @@ class HeartbeatMonitor(Node):
     def heartbeat_callback(self, msg):
         if self.shutting_down:
             return
-        
+
         node_name = msg.frame_id  # The node's unique identifier
         timestamp = self.get_clock().now().nanoseconds  # Current time
         self.heartbeat_status[node_name] = timestamp  # Update last seen time
@@ -58,7 +58,7 @@ class HeartbeatMonitor(Node):
     def emit_heartbeats(self):
         if self.shutting_down:
             return
-        
+
         current_time = self.get_clock().now().nanoseconds
         timeout = 5 * 1e9  # 5 seconds in nanoseconds
         # Emit the heartbeat status for each surface node
@@ -100,7 +100,7 @@ class HeartbeatMonitor(Node):
         """Clean shutdown logic"""
         if self.shutting_down:
             return
-            
+
         self.shutting_down = True
 
 

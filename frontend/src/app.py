@@ -21,6 +21,7 @@ from frontend_utils.log_helper import LogHelper
 from frontend_utils.recording_api import RecordingRoutes  # Import the new module
 from frontend_utils.controller_api import ControllerRoutes  # Import the new module
 
+
 class Frontend(Node):
     def __init__(self):
         super().__init__("frontend")
@@ -42,10 +43,10 @@ class Frontend(Node):
 
         # Get camera URLs from environment variables or use defaults
         self.camera_urls = {
-            'camera1': os.getenv('CAMERA1_URL', 'http://localhost:8889/camera_1'),
-            'camera2': os.getenv('CAMERA2_URL', 'http://localhost:8889/camera_2'),
-            'camera3': os.getenv('CAMERA3_URL', 'http://localhost:8889/camera_3'),
-            'camera4': os.getenv('CAMERA4_URL', 'http://localhost:8889/camera_4')
+            "camera1": os.getenv("CAMERA1_URL", "http://localhost:8889/camera_1"),
+            "camera2": os.getenv("CAMERA2_URL", "http://localhost:8889/camera_2"),
+            "camera3": os.getenv("CAMERA3_URL", "http://localhost:8889/camera_3"),
+            "camera4": os.getenv("CAMERA4_URL", "http://localhost:8889/camera_4"),
         }
 
         self.get_logger().info(f"Camera URLs: {self.camera_urls}")
@@ -79,56 +80,73 @@ class Frontend(Node):
         # Default Route
         @self.app.route("/")
         def index():
-            return redirect(url_for("new_ui"), code=302)
-        
+            return redirect(url_for("home"), code=302)
+
         # Main UI
-        @self.app.route("/ui")
-        def new_ui():
-            return render_template("innovative_ui.html", active_page="ui", camera_urls=self.camera_urls)
-        
+        @self.app.route("/home")
+        def home():
+            return render_template(
+                "innovative_ui.html", active_page="home", camera_urls=self.camera_urls
+            )
+
         ### -------- CAMERA PAGES -------- ###
 
         @self.app.route("/all-cameras")
         def all_cameras():
-            return render_template("all_cameras.html", active_page='all-cameras', camera_urls=self.camera_urls)
-        
+            return render_template(
+                "all_cameras.html",
+                active_page="all-cameras",
+                camera_urls=self.camera_urls,
+            )
+
         @self.app.route("/fullscreen-camera")
         def fullscreen_camera():
-            camera = request.args.get('camera', '1')  # Default to camera 1 if not specified
-            return render_template("fullscreen_camera.html", active_page='fullscreen-camera', camera=camera, camera_urls=self.camera_urls)
-        
+            camera = request.args.get(
+                "camera", "1"
+            )  # Default to camera 1 if not specified
+            return render_template(
+                "fullscreen_camera.html",
+                active_page="fullscreen-camera",
+                camera=camera,
+                camera_urls=self.camera_urls,
+            )
+
         ### -------- UTILITY PAGES -------- ###
 
         # The thrust testing page
         @self.app.route("/thruster-testing")
         def thrust_testing():
-            return render_template("thruster_testing.html", active_page='thruster-testing')
-        
+            return render_template(
+                "thruster_testing.html", active_page="thruster-testing"
+            )
+
         # Node status page
         @self.app.route("/node-status")
         def node_status():
-            return render_template("node_status.html", active_page='node-status')
-        
+            return render_template("node_status.html", active_page="node-status")
+
         # Logs page
         @self.app.route("/logs")
         def logs():
-            return render_template("logs.html", active_page='logs')
-        
+            return render_template("logs.html", active_page="logs")
+
         # Recordings page
         @self.app.route("/recordings")
         def recordings_page():
-            return render_template("recordings.html", active_page='recordings')
-        
+            return render_template("recordings.html", active_page="recordings")
+
         @self.app.route("/controller-mapping")
         def controller_mapping():
-            return render_template("controller_mapping.html", active_page='controller-mapping')
+            return render_template(
+                "controller_mapping.html", active_page="controller-mapping"
+            )
 
     # Function to setup the socketio events
     def setup_socketio_events(self):
         @self.socketio.on("connect")
         def connect():
             # Only log first connection in a session, not reconnects
-            if not hasattr(self, '_session_started'):
+            if not hasattr(self, "_session_started"):
                 self.get_logger().info("SocketIO client connected")
                 self._session_started = True
 
@@ -147,29 +165,30 @@ class Frontend(Node):
                     self.get_logger().debug(f"Frontend event: {event}")
                 # Handle the event
                 handle_frontend_event(self, event, data)
-            
+
             # Silently handle log-related events
             elif event.startswith("request_logs") or event.startswith("clear_logs"):
                 pass
-                
+
             # Forward all other events
             else:
                 self.socketio.emit(event, data)
 
+
 def main():
     rclpy.init()
     frontend = Frontend()
-    
+
     # Silent exit on SIGINT - just terminate immediately
     def silent_exit(sig, frame):
         # Exit without any logging or cleanup
         frontend.log_helper.stop_log_monitor()
         os._exit(0)  # exit immediately without cleanup
-    
+
     # Register the signal handler
     signal.signal(signal.SIGINT, silent_exit)
     signal.signal(signal.SIGTERM, silent_exit)
-    
+
     try:
         rclpy.spin(frontend)
     except KeyboardInterrupt:
@@ -179,6 +198,7 @@ def main():
         # This will only run if spin() returns normally, not after os._exit()
         frontend.log_helper.stop_log_monitor()
         sys.exit(0)
+
 
 if __name__ == "__main__":
     main()
