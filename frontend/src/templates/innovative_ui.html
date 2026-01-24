@@ -3,51 +3,28 @@
 {% block title %}Home | X17-Surface{% endblock %}
 
 {% block content %}
-    <div class="default-container">
-        <div class="left-container">
-            <iframe id=stream1 src="{{ camera_urls.camera1|safe }}" scrolling="no" style="width: 100%; height: 100%;"></iframe>
-            <iframe id=stream2 src="{{ camera_urls.camera2|safe }}" scrolling="no" style="width: 100%; height: 100%;"></iframe>
-            <iframe id=stream3 src="{{ camera_urls.camera3|safe }}" scrolling="no" style="width: 100%; height: 100%;"></iframe>
-        </div>
-        <div class="middle-container">
-            <div class="speedo-grid">
-                <div>
-                    <canvas id="speedo1" width="300" height="150"></canvas>
-                </div>
-                <div>
-                    <canvas id="speedo2" width="300" height="150"></canvas>
-                </div>
-                <div>
-                    <div class="thruster-label">1</div>
-                    <canvas id="speedo3" width="300" height="150"></canvas>
-                </div>
-                <div>
-                    <div class="thruster-label">2</div>
-                    <canvas id="speedo4" width="300" height="150"></canvas>
-                    
-                </div>
-                <div>
-                    <div class="thruster-label">3</div>
-                    <canvas id="speedo5" width="300" height="150"></canvas>
-                    
-                </div>
-                <div>
-                    <div class="thruster-label">4</div>
-                    <canvas id="speedo6" width="300" height="150"></canvas>
-                    
-                </div>
-                <div>
-                    <div class="thruster-label">5</div>
-                    <canvas id="speedo7" width="300" height="150"></canvas>
-                    <div class="thruster-label">7</div>
+<div class="dashboard-main">
 
-                </div>
-                <div>
-                    <div class="thruster-label">6</div>
-                    <canvas id="speedo8" width="300" height="150"></canvas>
-                    <div class="thruster-label">8</div>
-                </div>
-                
+    <div class="left-container">
+        <div class="stream-wrapper"><iframe id="stream1" src="{{ camera_urls.camera1|safe }}" scrolling="no"></iframe></div>
+        <div class="stream-wrapper"><iframe id="stream2" src="{{ camera_urls.camera2|safe }}" scrolling="no"></iframe></div>
+        <div class="stream-wrapper"><iframe id="stream3" src="{{ camera_urls.camera3|safe }}" scrolling="no"></iframe></div>
+    </div>
+
+    <div class="middle-container">
+        <div class="speedo-grid">
+            <div class="thruster-cell"><canvas id="speedo1"></canvas><div class="thruster-label">1</div></div>
+            <div class="thruster-cell"><canvas id="speedo2"></canvas><div class="thruster-label">2</div></div>
+            <div class="thruster-cell"><canvas id="speedo3"></canvas><div class="thruster-label">3</div></div>
+            <div class="thruster-cell"><canvas id="speedo4"></canvas><div class="thruster-label">4</div></div>
+            <div class="thruster-cell"><canvas id="speedo5"></canvas><div class="thruster-label">5</div></div>
+            <div class="thruster-cell"><canvas id="speedo6"></canvas><div class="thruster-label">6</div></div>
+        </div>
+
+        <div id="command-container">
+            <div class="command-box">
+                <span class="label">Linear Command</span>
+                <span class="value">&lt;00.00, 00.00, 00.00&gt; m/s</span>
             </div>
             <div class="command-box">
                 <span class="label">Angular Command</span>
