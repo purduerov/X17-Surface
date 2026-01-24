@@ -2,6 +2,7 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import TimerAction
 
+
 def generate_launch_description():
     return LaunchDescription(
         [
@@ -11,9 +12,9 @@ def generate_launch_description():
                 namespace="rov",
             ),
             Node(
-                package='controller',
-                executable='sender.py',
-                namespace='rov',
+                package="controller",
+                executable="sender.py",
+                namespace="rov",
             ),
             Node(
                 package="mediamtx_node",
@@ -29,10 +30,10 @@ def generate_launch_description():
                         namespace="rov",
                     ),
                     Node(
-                        package='ui_subscriber',
-                        executable='ui_subscriber.py',
-                        namespace='rov',
-                    )
+                        package="ui_subscriber",
+                        executable="ui_subscriber.py",
+                        namespace="rov",
+                    ),
                 ],
             ),
         ]

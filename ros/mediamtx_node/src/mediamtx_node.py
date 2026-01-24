@@ -53,7 +53,6 @@ class MediaMTXNode(Node):
         except Exception as e:
             return f"Error getting local IP: {e}"
 
-
     def start_mediamtx_server(self):
         def start_server():
             # Start the MediaMTX server process
@@ -95,11 +94,11 @@ class MediaMTXNode(Node):
         """Clean shutdown logic"""
         if self.shutting_down:
             return
-            
+
         self.shutting_down = True
 
         # Kill the MediaMTX server process if it exists
-        if hasattr(self, 'process'):
+        if hasattr(self, "process"):
             self.process.terminate()
             self.process.wait()
 
@@ -127,7 +126,6 @@ def main():
         # Clean up resources
         publisher_node.cleanup()
         sys.exit(0)
-
 
 
 if __name__ == "__main__":
