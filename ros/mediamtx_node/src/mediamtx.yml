@@ -7,6 +7,8 @@ paths:
 
   camera_4:
 
+  cv_camera:
+
 rtspAddress: ":8554"
 webrtc: yes
 
