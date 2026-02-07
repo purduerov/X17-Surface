@@ -83,6 +83,22 @@
 {% block content %}
 <div class="container-fluid py-4">
   <div class="row g-4">
+    <!-- CV Camera -->
+    <div class="col-12 col-md-6">
+      <div class="camera-cell">
+        <div class="camera-label">CV Camera</div>
+        <iframe src="{{ camera_urls.cv_camera|safe }}" scrolling="no"></iframe>
+        
+        <button class="photo-button" data-camera="cv_camera">
+          📸
+        </button>
+
+        <button class="fullscreen-button" data-camera="cv">
+          <i class="bi bi-fullscreen"></i>
+        </button>
+      </div>
+    </div>
+    
     <!-- Camera 1 -->
     <div class="col-12 col-md-6">
       <div class="camera-cell">
@@ -131,7 +147,7 @@
       </div>
     </div>
     
-    <!-- Camera 4 -->
+    <!-- Camera 4
     <div class="col-12 col-md-6">
       <div class="camera-cell">
         <div class="camera-label">Camera 4</div>
@@ -145,7 +161,7 @@
           <i class="bi bi-fullscreen"></i>
         </button>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 {% endblock %}
