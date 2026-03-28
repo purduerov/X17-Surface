@@ -13,8 +13,8 @@ ament_python_install_package(${PROJECT_NAME})
 install(
   PROGRAMS
     src/mediamtx_node.py
-    src/go2rtc
-    src/go2rtc.yaml
+    src/mediamtx
+    src/mediamtx.yml
   DESTINATION lib/${PROJECT_NAME}
 )
 

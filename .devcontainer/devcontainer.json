@@ -27,6 +27,5 @@
         "--env=PIP_BREAK_SYSTEM_PACKAGES=1"
     ],
     "remoteUser": "root",
-    "postCreateCommand": "echo 'source /opt/ros/jazzy/setup.bash' >> /root/.bashrc && echo 'export ROS_DOMAIN_ID=69' >> /root/.bashrc",
-    "forwardPorts": [1984, 1984]
+    "postCreateCommand": "echo 'source /opt/ros/jazzy/setup.bash' >> /root/.bashrc && echo 'export ROS_DOMAIN_ID=69' >> /root/.bashrc"
 }

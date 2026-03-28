@@ -1,0 +1,16 @@
+paths:
+  camera_1:
+
+  camera_2:
+
+  camera_3:
+
+  camera_4:
+
+rtspAddress: ":8554"
+webrtc: yes
+
+# Disable unused protocols
+rtmp: no
+srt: no
+hls: no
