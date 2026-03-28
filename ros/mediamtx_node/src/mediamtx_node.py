@@ -26,7 +26,7 @@ class MediaMTXNode(Node):
         self.publisher = self.create_publisher(String, "surface_ip", 10)
         self.timer = self.create_timer(1.0, self.publish_ip_address)
         self.ip_pub_count = 0
-        self.ip_pub_count_max = 10
+        self.ip_pub_count_max = 1000
 
         # Start the MediaMTX server process and monitor the process and watch for certain events and messages
         self.start_mediamtx_server()
@@ -58,7 +58,7 @@ class MediaMTXNode(Node):
             # Start the MediaMTX server process
             self.get_logger().info("Starting go2rtc server")
             # Ensure the executable is present before executing
-            if os.path.exists("install/mediamtx_node/lib/mediamtx_node/mediamtx"):
+            if os.path.exists("install/mediamtx_node/lib/mediamtx_node/go2rtc"):
                 self.get_logger().info("go2rtc server executable found")
             else:
                 self.get_logger().error("go2rtc server executable not found")
