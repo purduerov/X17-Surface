@@ -1,0 +1,16 @@
+api:
+  listen: ":1984"
+
+rtsp:
+  listen: ":8554"
+
+mjpeg:
+  listen: ":8080"
+
+mp4: false
+
+streams:
+    camera1:
+    camera2:
+    camera3:
+    camera4:

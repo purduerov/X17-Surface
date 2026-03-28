@@ -56,20 +56,20 @@ class MediaMTXNode(Node):
     def start_mediamtx_server(self):
         def start_server():
             # Start the MediaMTX server process
-            self.get_logger().info("Starting MediaMTX server")
+            self.get_logger().info("Starting go2rtc server")
             # Ensure the executable is present before executing
             if os.path.exists("install/mediamtx_node/lib/mediamtx_node/mediamtx"):
-                self.get_logger().info("MediaMTX server executable found")
+                self.get_logger().info("go2rtc server executable found")
             else:
-                self.get_logger().error("MediaMTX server executable not found")
+                self.get_logger().error("go2rtc server executable not found")
                 return
 
             # Start the MediaMTX server process
-            self.get_logger().info("Starting MediaMTX server process")
+            self.get_logger().info("Starting go2rtc server process")
             self.process = subprocess.Popen(
                 [
-                    "install/mediamtx_node/lib/mediamtx_node/mediamtx",
-                    "install/mediamtx_node/lib/mediamtx_node/mediamtx.yml",
+                    "install/mediamtx_node/lib/mediamtx_node/go2rtc_linux_amd64",
+                    "install/mediamtx_node/lib/mediamtx_node/go2rtc.yaml",
                 ],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
@@ -83,7 +83,7 @@ class MediaMTXNode(Node):
                     for line in self.process.stderr:
                         self.get_logger().error(line.strip())
                     if self.process.poll() is not None:
-                        self.get_logger().info("MediaMTX server process has terminated")
+                        self.get_logger().info("go2rtc server process has terminated")
                         break
 
         # Start the server in a separate thread

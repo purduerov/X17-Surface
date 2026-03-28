@@ -43,10 +43,10 @@ class Frontend(Node):
 
         # Get camera URLs from environment variables or use defaults
         self.camera_urls = {
-            "camera1": os.getenv("CAMERA1_URL", "http://localhost:8889/camera_1"),
-            "camera2": os.getenv("CAMERA2_URL", "http://localhost:8889/camera_2"),
-            "camera3": os.getenv("CAMERA3_URL", "http://localhost:8889/camera_3"),
-            "camera4": os.getenv("CAMERA4_URL", "http://localhost:8889/camera_4"),
+            "camera1": os.getenv("CAMERA1_URL", "http://localhost:8554/camera1"),
+            "camera2": os.getenv("CAMERA2_URL", "http://localhost:8554/camera2"),
+            "camera3": os.getenv("CAMERA3_URL", "http://localhost:8554/camera3"),
+            "camera4": os.getenv("CAMERA4_URL", "http://localhost:8554/camera4"),
         }
 
         self.get_logger().info(f"Camera URLs: {self.camera_urls}")
