@@ -68,7 +68,7 @@ class MediaMTXNode(Node):
             self.get_logger().info("Starting go2rtc server process")
             self.process = subprocess.Popen(
                 [
-                    "install/mediamtx_node/lib/mediamtx_node/go2rtc_linux_amd64",
+                    "install/mediamtx_node/lib/mediamtx_node/go2rtc",
                     "install/mediamtx_node/lib/mediamtx_node/go2rtc.yaml",
                 ],
                 stdout=subprocess.PIPE,
