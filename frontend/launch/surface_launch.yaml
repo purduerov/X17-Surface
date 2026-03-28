@@ -5,7 +5,7 @@ launch:
     exec: app.py
     namespace: rov
 
-- node:
-    pkg: controller
-    exec: sender.py
-    namespace: rov
+# - node:
+#     pkg: controller
+#     exec: sender.py
+#     namespace: rov

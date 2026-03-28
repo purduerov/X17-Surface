@@ -1,43 +1,19 @@
-# Check if mediamtx executable exists in /ros/mediamtx
-if [ ! -f ./ros/mediamtx_node/src/mediamtx ]; then
+# Check if go2rtc executable exists in /ros/mediamtx
+if [ ! -f ./ros/mediamtx_node/src/go2rtc ]; then
     # Determine architecture
     # If arch is amd64 (x86_64), download the amd64 version
     # If arch is arm64 (aarch64), download the arm64 version
 
     # 1. Download the tar.gz file
-    echo "Downloading mediamtx..."
+    echo "Downloading go2rtc..."
     arch=$(uname -m)
     if [ "$arch" == "x86_64" ]; then
         echo "Architecture: amd64"
-        wget https://github.com/bluenviron/mediamtx/releases/download/v1.11.1/mediamtx_v1.11.1_linux_amd64.tar.gz
-
-        # 3. Extract only the mediamtx executable
-        echo "Extracting the mediamtx executable..."
-        tar -xvzf mediamtx_v1.11.1_linux_amd64.tar.gz -K mediamtx
-
-        # 4. Move the mediamtx binary to the target directory
-        echo "Moving mediamtx"
-        mv mediamtx ./ros/mediamtx_node/src/
-
-        # (Optional) 5. Cleanup
-        echo "Cleaning up..."
-        rm mediamtx_v1.11.1_linux_amd64.tar.gz
+        wget -O ./ros/mediamtx_node/src/go2rtc https://github.com/AlexxIT/go2rtc/releases/download/v1.9.14/go2rtc_linux_amd64
 
     elif [ "$arch" == "aarch64" ]; then
         echo "Architecture: arm64"
-        wget https://github.com/bluenviron/mediamtx/releases/download/v1.11.1/mediamtx_v1.11.1_linux_arm64v8.tar.gz
-
-        # 3. Extract only the mediamtx executable
-        echo "Extracting the mediamtx executable..."
-        tar -xvzf mediamtx_v1.11.1_linux_arm64v8.tar.gz -K mediamtx
-
-        # 4. Move the mediamtx binary to the target directory
-        echo "Moving mediamtx"
-        mv mediamtx ./ros/mediamtx_node/src/
-
-        # # (Optional) 5. Cleanup
-        echo "Cleaning up..."
-        rm mediamtx_v1.11.1_linux_arm64v8.tar.gz
+        wget -O ./ros/mediamtx_node/src/go2rtc https://github.com/AlexxIT/go2rtc/releases/download/v1.9.14/go2rtc_linux_arm64
     else
         echo "Unsupported architecture: $arch"
         exit 1
@@ -45,5 +21,5 @@ if [ ! -f ./ros/mediamtx_node/src/mediamtx ]; then
 
     echo "Done!"
 else
-    echo "mediamtx executable found in ./ros/mediamtx_node/src"
+    echo "go2rtc executable found in ./ros/mediamtx_node/src"
 fi
