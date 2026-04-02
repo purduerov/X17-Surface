@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cameraButtons = document.querySelectorAll('.btn-camera');
     
     // Use environment-provided URLs if available, or fall back to default
-    const defaultBaseUrl = 'http://localhost:8889/camera_';
+    const defaultBaseUrl = 'http://localhost:1984/stream.html?src=camera';
     // Access the camera URLs passed from the template
     const cameraUrls = window.cameraUrls || {};
 
