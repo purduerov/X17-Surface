@@ -69,7 +69,7 @@ class MediaMTXNode(Node):
             self.process = subprocess.Popen(
                 [
                     "install/mediamtx_node/lib/mediamtx_node/go2rtc",
-                    "install/mediamtx_node/lib/mediamtx_node/go2rtc.yaml",
+                    "-c install/mediamtx_node/lib/mediamtx_node/go2rtc.yaml",
                 ],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
